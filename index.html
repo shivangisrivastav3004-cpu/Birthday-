@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Birthday Surprise 🎉</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f5dc, #fdf6e3);
+      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      display: flex;
+      text-align: center;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #5a4634;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 25px;
+      background: #d4a373;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #b08968;
+    }
+
+    /* 🎈 Floating balloons */
+    .floating {
+      position: absolute;
+      bottom: -100px;
+      font-size: 40px;
+      animation: floatUp 10s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(-120vh);}
+    }
+
+    .balloon {
+      font-size: 50px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .cake {
+      font-size: 120px;
+      margin: 20px;
+    }
+
+    #slice {
+      font-size: 100px;
+      display: none;
+    }
+
+    #letter {
+      display: none;
+      font-size: 18px;
+      max-width: 300px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- 🎈 Floating background balloons -->
+<div class="floating" style="left:10%;">🎈</div>
+<div class="floating" style="left:30%; animation-delay:2s;">🎈</div>
+<div class="floating" style="left:50%; animation-delay:4s;">🎈</div>
+<div class="floating" style="left:70%; animation-delay:1s;">🎈</div>
+<div class="floating" style="left:90%; animation-delay:3s;">🎈</div>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+  <h1>Hey ❤️</h1>
+  <p>I made something special for you...</p>
+  <button onclick="nextPage(1)">Next</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+  <h1>Wait a little...</h1>
+  <button onclick="nextPage(2)">Next</button>
+</div>
+
+<!-- BALLOON PAGE -->
+<div id="page3" class="page">
+  <h1>Tap balloons 🎈</h1>
+
+  <div>
+    <span class="balloon" onclick="popBalloon()">🎈</span>
+    <span class="balloon" onclick="popBalloon()">🎈</span>
+    <span class="balloon" onclick="popBalloon()">🎈</span>
+    <span class="balloon" onclick="popBalloon()">🎈</span>
+  </div>
+
+  <h2 id="text"></h2>
+
+  <button onclick="nextPage(3)">Next</button>
+</div>
+
+<!-- CAKE PAGE -->
+<div id="page4" class="page">
+  <h1>Make a wish 🎂</h1>
+
+  <div id="cake" class="cake">🎂</div>
+
+  <button onclick="decorate()">Decorate</button>
+  <button onclick="blow()">Blow Candles</button>
+  <button onclick="cutCake()">Cut Cake</button>
+
+  <div id="slice">🍰</div>
+
+  <button onclick="nextPage(4)">Next</button>
+</div>
+
+<!-- ENVELOPE -->
+<div id="page5" class="page">
+  <h1>Open this 💌</h1>
+
+  <div onclick="openLetter()" style="font-size:80px;cursor:pointer;">📩</div>
+
+  <p id="letter">
+    You are the most special person in my life ❤️<br><br>
+    I’m so lucky to have you 💖<br><br>
+    Happy Birthday 🎉
+  </p>
+</div>
+
+<script>
+function nextPage(n) {
+  document.getElementById("page" + n).classList.remove("active");
+  document.getElementById("page" + (n + 1)).classList.add("active");
+}
+
+let step = 0;
+let words = ["You", "You are", "You are very", "You are very special ❤️"];
+
+function popBalloon() {
+  if (step < words.length) {
+    document.getElementById("text").innerText = words[step];
+    step++;
+  }
+}
+
+function decorate() {
+  document.getElementById("cake").innerText = "🎂🕯️";
+}
+
+function blow() {
+  document.getElementById("cake").innerText = "🎂";
+}
+
+function cutCake() {
+  document.getElementById("slice").style.display = "block";
+}
+
+function openLetter() {
+  document.getElementById("letter").style.display = "block";
+}
+</script>
+
+</body>
+</html>
